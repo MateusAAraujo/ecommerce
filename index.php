@@ -27,6 +27,7 @@ $app->get('/admin', function() {
     $page->setTpl("index");
 });
 
+//Rota login
 $app->get('/admin/login', function() {
     
     $page = new PageAdmin([
@@ -41,18 +42,19 @@ $app->post('/admin/login', function(){
     
     User::login($_POST['deslogin'], $_POST['despassword']);
     
-    header('location: /admin');
-    
+    header('location: /admin');    
     exit;
 });
 
+//Rota logout
 $app->get('/admin/logout', function() {
     User::logout();
     
     header('Location: /admin/login');
-    exit();
+    exit;
 });
 
+//rotas para listar todos os usuários
 $app->get('/admin/users', function(){
     
     User::verifyLogin();
@@ -66,6 +68,7 @@ $app->get('/admin/users', function(){
     ));    
 });
 
+//Rota para cadastrar novos usuários
 $app->get('/admin/users/create', function(){
     
     User::verifyLogin();
@@ -75,6 +78,7 @@ $app->get('/admin/users/create', function(){
     $page->setTpl('users-create');    
 });
 
+//Rota para deleta usuários
 $app->get('/admin/users/:iduser/delete', function($iduser){
     
     User::verifyLogin();
@@ -89,6 +93,7 @@ $app->get('/admin/users/:iduser/delete', function($iduser){
     exit;
 });
 
+//Rota para carregar e atualizar dados de usuários
 $app->get('/admin/users/:iduser', function($iduser){
     
     User::verifyLogin();
@@ -104,6 +109,7 @@ $app->get('/admin/users/:iduser', function($iduser){
     ));    
 });
 
+//Rota salvar usuários novos
 $app->post('/admin/users/create', function(){
     
     User::verifyLogin();
@@ -120,6 +126,7 @@ $app->post('/admin/users/create', function(){
     exit;
 });
 
+//Salva atualização de dados de usuários
 $app->post('/admin/users/:iduser', function($iduser){
     
     User::verifyLogin();
