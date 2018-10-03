@@ -86,7 +86,6 @@ $app->post('/admin/categories/:idcategory', function($idcategory){
     exit;
 });
 
-
 $app->get('/categories/:idcategory', function($idcategory){
     
     $category = new Category();
