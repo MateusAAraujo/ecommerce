@@ -142,8 +142,8 @@ class Cart extends Model {
 	
 	$sql = new Sql();	
 	
-	$rows = $sql->select("SELECT b.idproduct, b.desproduct, b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl, 
-	    COUNT(*) AS nrqtd, SUM(b.vlprice) as vltotal
+	$rows = $sql->select("
+	    SELECT b.idproduct, b.desproduct, b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl, COUNT(*) AS nrqtd, SUM(b.vlprice) AS vltotal
 	    FROM tb_cartsproducts a 
 	    INNER JOIN tb_products b USING (idproduct) 
 	    WHERE idcart = :idcart AND dtremoved IS NULL
@@ -162,7 +162,7 @@ class Cart extends Model {
 	
 	$results = $sql->select("SELECT SUM(vlprice) AS vlprice, SUM(vlwidth) AS vlwidth, SUM(vlheight) AS vlheight, SUM(vllength) AS vllength, SUM(vlweight) AS vlweight, COUNT(*) AS nrqtd
 	    FROM tb_products a
-	    INNER JOIN tb_cartsproducts b ON a.idproduct = b.idproduct
+	    INNER JOIN tb_cartsproducts b USING(idproduct)
 	    WHERE b.idcart = :idcart AND dtremoved IS NULL;", [
 		':idcart'=>$this->getidcart()
 	    ]);
