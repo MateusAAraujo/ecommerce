@@ -38,7 +38,7 @@ $app->post('/admin/users/:iduser/password', function($iduser){
     endif;
     
     if($_POST['despassword'] !== $_POST['despassword-confirm']):
-	User::setError('As senhas são iguais.');
+	User::setError('As senhas são diferentes.');
 	header("Location: /admin/users/$iduser/password");
 	exit();
     endif;
@@ -49,7 +49,7 @@ $app->post('/admin/users/:iduser/password', function($iduser){
     
     $user->setPassword(User::getPasswordHash($_POST['despassword']));
     
-    User::setSuccess('Semha alterada com sucesso!.');
+    User::setSuccess('Senha alterada com sucesso!.');
     
     header("Location: /admin/users/$iduser/password");
     
