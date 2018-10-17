@@ -8,13 +8,38 @@ $app->get('/admin/products', function(){
     
     User::verifyLogin();
     
-    $products = Products::listAll();
+    $search = (isset($_GET['search'])) ? $_GET['search'] : '';
     
-    $page = new PageAdmin();
+    $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     
-    $page->setTpl('products', [
-	'products'=>$products
-    ]);
+    if ($search != ''):
+	$pagination = Products::getPageSearch($search, $page);
+    else:
+	$pagination = Products::getPage($page);
+    endif;
+
+    $pages = [];
+    
+    for($x = 0; $x < $pagination['pages']; $x++):
+	
+	array_push($pages, [
+	    'href'=>'/admin/products?'.http_build_query([
+	    'page'=>$x+1,
+	    'search'=>$search
+	]),
+	    'text'=>$x+1
+	
+	]);    
+	
+    endfor;
+	
+	$page = new PageAdmin();
+    
+    $page->setTpl('products', array(
+	'products'=>$pagination['data'],
+	'search'=>$search,
+	'pages'=>$pages
+    ));
 });
 
 $app->get('/admin/products/create', function(){

@@ -24,7 +24,7 @@ $app->get('/admin/categories', function(){
     for($x = 0; $x < $pagination['pages']; $x++):
 	
 	array_push($pages, [
-	    'href'=>'/admin/Categorys?'.http_build_query([
+	    'href'=>'/admin/categories?'.http_build_query([
 	    'page'=>$x+1,
 	    'search'=>$search
 	]),
@@ -40,7 +40,7 @@ $app->get('/admin/categories', function(){
 	'categories'=>$pagination['data'],
 	'search'=>$search,
 	'pages'=>$pages
-    ));    
+    ));
 });
 
 $app->get('/admin/categories/create', function(){
