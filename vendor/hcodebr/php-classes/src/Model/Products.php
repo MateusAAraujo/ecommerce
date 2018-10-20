@@ -39,7 +39,7 @@ class Products extends Model {
 	    ':vlheight'=>$this->getvlheight(),
 	    ':vllength'=>$this->getvllength(),
 	    ':vlweight'=>$this->getvlweight(),
-	    ':desurl'=>$this->getdesurl(),
+	    ':desurl'=>$this->getdesurl()
 	    
 	));
 	

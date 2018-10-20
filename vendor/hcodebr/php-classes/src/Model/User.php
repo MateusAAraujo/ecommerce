@@ -167,6 +167,7 @@ class User extends Model {
     }
 
     public function delete() {
+	
 	$sql = new Sql();
 
 	$sql->query("CALL sp_users_delete(:iduser)", array(
