@@ -264,7 +264,7 @@ $app->post('/checkout', function(){
 
 $app->get('/order/:idorder/pagseguro', function($idorder){
     
-    User::verifyLogin();
+    User::verifyLogin(false);
     
     $order = new Order();
     
@@ -290,7 +290,7 @@ $app->get('/order/:idorder/pagseguro', function($idorder){
 
 $app->get('/order/:idorder/paypal', function($idorder){
     
-    User::verifyLogin();
+    User::verifyLogin(false);
     
     $order = new Order();
     
@@ -689,4 +689,4 @@ $app->post('/profile/change-password', function(){
     exit;
 });
 
-?>1
+?>

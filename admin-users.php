@@ -38,7 +38,7 @@ $app->post('/admin/users/:iduser/password', function($iduser){
     endif;
     
     if($_POST['despassword'] !== $_POST['despassword-confirm']):
-	User::setError('As senhas são diferentes.');
+	User::setError('Senhas precisam ser idênticas.');
 	header("Location: /admin/users/$iduser/password");
 	exit();
     endif;
@@ -64,7 +64,7 @@ $app->get('/admin/users', function(){
     
     $search = (isset($_GET['search'])) ? $_GET['search'] : '';
     
-    $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+    $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
     
     if ($search != ''):
 	$pagination = User::getPageSearch($search, $page);

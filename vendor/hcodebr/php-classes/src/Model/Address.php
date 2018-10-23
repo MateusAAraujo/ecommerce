@@ -34,7 +34,7 @@ class Address extends Model {
 	if(isset($data['logradouro']) && $data['logradouro']):
 	    
 	    $this->setdesaddress($data['logradouro']);
-	    $this->setdescomplement($data['complemento']);
+	    $this->setdesnumber($data['complemento']);
 	    $this->setdesdistrict($data['bairro']);
 	    $this->setdescity($data['localidade']);
 	    $this->setdesstate($data['uf']);
@@ -52,8 +52,8 @@ class Address extends Model {
 	    ':idaddress'=>$this->getidaddress(),
 	    ':idperson'=>$this->getidperson(),
 	    ':desaddress'=>utf8_decode($this->getdesaddress()),
-	    ':desnumber'=>$this->getdesnumber(),
-	    ':descomplement'=>utf8_decode($this->getdescomplement()),
+	    ':desnumber'=>$this->getdescomplement(),
+	    ':descomplement'=>utf8_decode(''),
 	    ':descity'=>utf8_decode($this->getdescity()),
 	    ':desstate'=>utf8_decode($this->getdesstate()),
 	    ':descountry'=>utf8_decode($this->getdescountry()),
